@@ -1,0 +1,12 @@
+{
+  "db": {
+    "schema": "testing",
+    "ip": "127.0.0.1",
+    "user": "ao",
+    "pass": "a1b2c3d4e5",
+    "port": 3306,
+    "dialect": "mysql",
+    "debug": false,
+    "backup": false
+  }
+}

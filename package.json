@@ -1,0 +1,15 @@
+{
+  "name": "durationFixer",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "description": "A simple app to fix the duration field",
+  "main": "server.js",
+  "author": "Jairo Martinez",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^1.4.2",
+    "mysql": "^2.8.0"
+  }
+}
