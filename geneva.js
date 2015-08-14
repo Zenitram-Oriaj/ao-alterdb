@@ -41,7 +41,7 @@ function _add(cb) {
 	cb = (typeof cb === 'function') ? cb : function () {};
 
 	try {
-		var q = "ALTER TABLE `testing`.`controllerEvents` ADD COLUMN `millis` INT(22) NULL DEFAULT 0 AFTER `duration`;";
+		var q = "ALTER TABLE `" + _cfg.db.schema + "`.`controllerEvents` ADD COLUMN `millis` INT(22) NULL DEFAULT 0 AFTER `duration`;";
 		_comms.query(q, function (err, dat) {
 			if (err) {
 				cb(err, null);
@@ -53,19 +53,13 @@ function _add(cb) {
 	catch(ex){
 		cb(ex,null);
 	}
-	/*
-	 ALTER TABLE `testing`.`controllerEvents`
-	 ADD COLUMN `millis` INT(22) NULL DEFAULT 0 AFTER `duration`;
-	 */
-
-
 }
 
 function _remove(cb){
 	cb = (typeof cb === 'function') ? cb : function () {};
 
 	try {
-		var q = "ALTER TABLE `testing`.`controllerEvents` " +
+		var q = "ALTER TABLE `" + _cfg.db.schema + "`.`controllerEvents` " +
 			"DROP COLUMN `processedAt`, " +
 			"DROP COLUMN `retries`, " +
 			"DROP COLUMN `prior`, " +
