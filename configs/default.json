@@ -1,6 +1,6 @@
 {
   "db": {
-    "schema": "testing",
+    "schema": "agileoffice-gateway",
     "ip": "127.0.0.1",
     "user": "ao",
     "pass": "a1b2c3d4e5",
