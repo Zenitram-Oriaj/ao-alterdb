@@ -110,33 +110,26 @@ function _init() {
 				console.error('----- CONNECTION ERROR OCCURRED -----');
 				console.error(err);
 			} else {
-				_add(function(err,res){
+				_collectCtrls(function(err,cts){
 					if(err){
-						console.error('----- "_add" ERROR OCCURRED -----');
+						console.error('----- COLLECT CONTROLLERS ERROR OCCURRED -----');
 						console.error(err);
 					} else {
-						_collectCtrls(function(err,cts){
+						async.mapSeries(cts,_run,function(err,res){
 							if(err){
-								console.error('----- COLLECT CONTROLLERS ERROR OCCURRED -----');
+								console.error('----- "_run" ERROR OCCURRED -----');
 								console.error(err);
 							} else {
-								async.mapSeries(cts,_run,function(err,res){
+								_remove(function () {
 									if(err){
-										console.error('----- "_run" ERROR OCCURRED -----');
+										console.error('----- "_remove" ERROR OCCURRED -----');
 										console.error(err);
-									} else {
-										_remove(function () {
-											if(err){
-												console.error('----- "_remove" ERROR OCCURRED -----');
-												console.error(err);
-											}
-											_comms.destroy();
-											console.log('----- OPERATION COMPLETED -----');
-										});
 									}
-								})
+									_comms.destroy();
+									console.log('----- OPERATION COMPLETED -----');
+								});
 							}
-						});
+						})
 					}
 				});
 			}
