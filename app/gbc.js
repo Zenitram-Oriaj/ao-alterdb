@@ -52,6 +52,7 @@ var _fixDurations = function (obj, cb) {
 						cb(err,res);
 					});
 				} else {
+					console.log('Skipping ' + et[0].id);
 					cb(null,{});
 				}
 			}
