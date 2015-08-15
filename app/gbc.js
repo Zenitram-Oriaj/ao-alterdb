@@ -29,27 +29,31 @@ var _fixDurations = function (obj, cb) {
 			if (err) {
 				cb(err, null);
 			} else {
-				var e1 = et[0];
-				var e2 = et[1] || { createdAt: new Date() };
+				if(et[0] && et[0].state == 'PENDING'){
+					var e1 = et[0];
+					var e2 = et[1] || { createdAt: new Date() };
 
-				var d1 = new Date(e1.createdAt);
-				var d2 = new Date(e2.createdAt);
-				var millis = d2 - d1;
-				var duration = _msToTime(millis);
-				var dt = new Date();
+					var d1 = new Date(e1.createdAt);
+					var d2 = new Date(e2.createdAt);
+					var millis = d2 - d1;
+					var duration = _msToTime(millis);
+					var dt = new Date();
 
-				var r =  "UPDATE `" + _cfg.db.schema + "`.`controllerEvents` SET" +
-					" `duration`='" + duration + "'" +
-					", `millis` = '" + millis + "'" +
-					", `state` = '" + e1.event + "'" +
-					", `event` = 'COMPLETE'" +
-					" WHERE `id`='" + e1.id + "'";
+					var r =  "UPDATE `" + _cfg.db.schema + "`.`controllerEvents` SET" +
+						" `duration`='" + duration + "'" +
+						", `millis` = '" + millis + "'" +
+						", `state` = '" + e1.event + "'" +
+						", `event` = 'COMPLETE'" +
+						" WHERE `id`='" + e1.id + "'";
 
-				console.log(r);
+					console.log(r);
 
-				_comms.query(r, function (err, res) {
-					cb(err,res);
-				});
+					_comms.query(r, function (err, res) {
+						cb(err,res);
+					});
+				} else {
+					cb(null,{});
+				}
 			}
 		});
 	}
